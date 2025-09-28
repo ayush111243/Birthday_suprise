@@ -1,0 +1,125 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy Birthday — Special Surprise</title>
+  <style>
+    :root{
+      --bg: linear-gradient(135deg,#ffdde1,#ee9ca7);
+      --card:#ffffffcc;
+      --accent:#ff6bcb;
+      --soft:#6b6bff;
+      --glow:#ffd700;
+      font-family: "Poppins", system-ui, sans-serif;
+    }
+    html,body{height:100%;margin:0}
+    body{
+      display:grid;place-items:center;min-height:100%;background:var(--bg);
+      transition:background 600ms ease;
+    }
+    .stage{width:min(960px,94vw);padding:24px;display:grid;gap:22px;align-items:center;justify-items:center}.hero{
+  background:var(--card);backdrop-filter: blur(10px);border-radius:20px;padding:40px;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,0.1);
+  width:100%;animation:floatUp 1s ease both;
+}
+h1{margin:0 0 10px 0;font-size:clamp(28px,5vw,50px);letter-spacing:0.8px;color:#222}
+p.lead{margin:0 0 20px 0;color:#444a; font-size:17px;line-height:1.5}
+
+.btn{
+  display:inline-flex;align-items:center;gap:12px;
+  padding:16px 32px;border-radius:999px;border:0;font-weight:700;cursor:pointer;font-size:18px;
+  box-shadow:0 8px 22px rgba(0,0,0,0.15);
+  transition:transform 200ms ease, box-shadow 200ms ease;
+  background:linear-gradient(90deg,var(--accent),#ffa7d1);color:white;
+  text-transform:uppercase;letter-spacing:1px;
+  animation:pulse 2s infinite;
+}
+.btn:hover{transform:scale(1.05);box-shadow:0 12px 28px rgba(0,0,0,0.2)}
+.btn svg{width:24px;height:24px;fill:white;filter:drop-shadow(0 0 6px var(--glow))}
+
+.game, .card-full{display:none}
+.game.show, .card-full.show{display:block;animation:fadeIn 600ms ease both}
+
+.game{
+  background:white;padding:30px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.1);
+  text-align:center;max-width:600px;width:100%;
+}
+#target{
+  width:40px;height:40px;background:var(--accent);border-radius:50%;position:relative;cursor:pointer;
+  margin:30px auto;animation:bounce 2s infinite;
+}
+@keyframes bounce{0%,100%{top:0}50%{top:40px}}
+
+.card-full{min-height:320px;padding:32px;border-radius:18px;background:white;width:100%;box-shadow:0 12px 40px rgba(0,0,0,0.12);overflow:auto;}
+.message{white-space:pre-wrap;font-size:18px;line-height:1.7;color:#333}
+.controls{display:flex;gap:12px;justify-content:flex-end;margin-top:14px}
+.link-like{background:transparent;border:0;color:var(--soft);font-weight:700;cursor:pointer;font-size:15px}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes floatUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+
+  </style>
+</head>
+<body>
+  <main class="stage">
+    <section class="hero" aria-labelledby="hb">
+      <h1 id="hb">🌸 Happy Birthday, Twin! 🎂</h1>
+      <p class="lead">Today is not just another day — it’s *your* day. A moment to celebrate how strong, unique, and amazing you are. Ready for a surprise? 💖</p>
+      <button id="openBtn" class="btn" aria-controls="game" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 22c1.657 0 3-1.343 3-3h-6c0 1.657 1.343 3 3 3zm6-5.184V11a6 6 0 10-12 0v5.816l-1.447 1.342A1 1 0 006 20h12a1 1 0 00.447-1.842L18 16.816zM12 2a5 5 0 015 5c0 1.657-.896 3.09-2.236 3.9a4.978 4.978 0 01-5.528 0A4.978 4.978 0 017 7c0-2.761 2.239-5 5-5z"/></svg>
+        Open Your Gift
+      </button>
+    </section><!-- Mini Game -->
+<section id="game" class="game" role="region" aria-hidden="true">
+  <h2>🎮 Mini Challenge!</h2>
+  <p>Catch the bouncing flower to unlock your special note 🌸</p>
+  <div id="target"></div>
+</section>
+
+<!-- Special Note -->
+<article id="surprise" class="card-full" role="region" aria-hidden="true">
+  <h2 style="margin-top:0">💌 A Special Note for You</h2>
+  <div class="message">
+    Dear twin, today is a chapter that belongs only to you. This year may have brought challenges, but within every struggle you’ve shown strength. Whenever shadows creep in, remember — you are never alone. 🌟
+
+    There will always be people standing beside you, ready to lift you higher. Yes, the world may judge, but their words can never dim your light. Always be yourself, unapologetically. ✨
+
+    Positivity is your superpower — let it guide you through stormy skies. And if life ever feels too heavy and you don’t know who to turn to, remember this: I am here, always, with open arms, ready to listen, ready to care. 💕
+  </div>
+
+  <div class="controls">
+    <button id="backBtn" class="link-like">⟵ Go Back</button>
+  </div>
+</article>
+
+  </main>  <script>
+    const openBtn = document.getElementById('openBtn');
+    const game = document.getElementById('game');
+    const target = document.getElementById('target');
+    const surprise = document.getElementById('surprise');
+    const backBtn = document.getElementById('backBtn');
+
+    openBtn.addEventListener('click', ()=>{
+      game.classList.add('show');
+      game.setAttribute('aria-hidden','false');
+      openBtn.setAttribute('aria-expanded','true');
+      document.body.style.background = 'linear-gradient(135deg,#fff1f0,#e8f0ff)';
+    });
+
+    target.addEventListener('click', ()=>{
+      game.classList.remove('show');
+      surprise.classList.add('show');
+      surprise.setAttribute('aria-hidden','false');
+    });
+
+    backBtn.addEventListener('click', ()=>{
+      surprise.classList.remove('show');
+      surprise.setAttribute('aria-hidden','true');
+      openBtn.setAttribute('aria-expanded','false');
+      document.body.style.background = '';
+      openBtn.focus();
+    });
+  </script></body>
+</html>
